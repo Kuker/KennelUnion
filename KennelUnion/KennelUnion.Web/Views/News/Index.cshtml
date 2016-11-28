@@ -1,0 +1,12 @@
+﻿@model List<KennelUnion.Data.Entities.News>
+@{
+    ViewData["Title"] = "Aktualności";
+}
+<h2>Aktualności</h2>
+
+@foreach (var news in Model)
+{
+    <h3>@news.Title</h3>
+    <p>@news.Body</p>
+    <p>@news.CreatedOn</p>
+}

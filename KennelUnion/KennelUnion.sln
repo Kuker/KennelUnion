@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "KennelUnion.Web", "KennelUnion.Web\KennelUnion.Web.xproj", "{C6A78414-C88B-48B7-9C33-64AC9D09CEA3}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "KennelUnion.Data", "KennelUnion.Data\KennelUnion.Data.xproj", "{CAE3B514-282D-414F-96E7-B1E67E9CA376}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{C6A78414-C88B-48B7-9C33-64AC9D09CEA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C6A78414-C88B-48B7-9C33-64AC9D09CEA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C6A78414-C88B-48B7-9C33-64AC9D09CEA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAE3B514-282D-414F-96E7-B1E67E9CA376}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAE3B514-282D-414F-96E7-B1E67E9CA376}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAE3B514-282D-414F-96E7-B1E67E9CA376}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAE3B514-282D-414F-96E7-B1E67E9CA376}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

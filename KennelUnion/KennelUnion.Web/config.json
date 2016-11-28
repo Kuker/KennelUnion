@@ -1,0 +1,5 @@
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=(localdb)\\MSSQLLocalDb;Database=KennelUnionDb;Trusted_Connection=true;MultipleActiveResultSets=true;"
+  }
+}

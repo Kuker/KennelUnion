@@ -4,8 +4,48 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>@ViewData["Title"] - KennelUnion</title>
+    
+    <environment names="Development">
+        <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="css/superhero.css" />
+        <link rel="stylesheet" href="css/site.css" />
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/superhero/bootstrap.min.css"/>
+        <link rel="stylesheet" href="css/site.min.css" />
+    </environment>
 </head>
 <body>
+
+<div class="container fill">
+    <div class="navbar navbar-default site-navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="collapsing-navbar" aria-expanded="False">
+                    <span class="sr-only">Przełącz nawigacje</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">KennelUnion</a>
+            </div>
+            <div class="collapse navbar-collapse" id="collapsing-navbar">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Ogółem</a></li>
+                    <li><a href="#">Aktualności</a></li>
+                    <li><a href="#">Coś jeszcze innego</a></li>
+                    <li><a href="#">I jeszcze coś</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
     @RenderBody()
+</div>
+<environment names="Development">
+    <script src="lib/jquery/dist/jquery.js"></script>
+    <script src="lib/bootstrap/dist/js/bootstrap.js"></script>
+</environment>
+
+    @RenderSection("scripts", required: false)
 </body>
 </html>
