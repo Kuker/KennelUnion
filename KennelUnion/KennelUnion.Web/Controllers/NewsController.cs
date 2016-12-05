@@ -12,15 +12,17 @@ namespace KennelUnion.Web.Properties.Controllers
     public class NewsController : Controller
     {
         private readonly IRepository<News> _newsRepo;
+        private int maxNewsPerPage { get; set; }
 
         public NewsController(IRepository<News> newsRepo)
         {
             _newsRepo = newsRepo;
+            maxNewsPerPage = 10;
         }
 
         public IActionResult Index()
         {
-            var news = _newsRepo.GetAll();
+            var news = _newsRepo.GetAll().OrderBy(x=>x.CreatedOn).Take(maxNewsPerPage);
             return View(news.ToList());
         }
     }
