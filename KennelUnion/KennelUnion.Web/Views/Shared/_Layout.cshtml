@@ -6,13 +6,13 @@
     <title>@ViewData["Title"] - KennelUnion</title>
     
     <environment names="Development">
-        <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="css/united.css" />
-        <link rel="stylesheet" href="css/site.css" />
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/united.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
     </environment>
     <environment names="Staging,Production">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/superhero/bootstrap.min.css"/>
-        <link rel="stylesheet" href="css/site.min.css" />
+        <link rel="stylesheet" href="~/css/site.min.css" />
     </environment>
 </head>
 <body>
@@ -25,12 +25,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">KennelUnion</a>
+            <a class="navbar-brand" asp-controller="News" asp-action="Index">KennelUnion</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Strona główna</a></li>
-                <li ><a href="#">O nas</a></li>
+                <li class="active"><a asp-controller="News" asp-action="Index">Strona główna</a></li>
+                <li ><a asp-controller="Info" asp-action="About">O nas</a></li>
                 <li ><a href="#">Historia</a></li>
                 <li ><a href="#">Kontakt</a></li>
             </ul>
@@ -41,14 +41,17 @@
         </div>
     </div>
 </nav>
-    <div class="container">
+<div class="container">
+    <div class="row">
         @RenderBody()
     </div>
+</div>
 <environment names="Development">
-    <script src="lib/jquery/dist/jquery.js"></script>
-    <script src="lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/js/main.js"></script>
 </environment>
 
-    @RenderSection("scripts", required: false)
+@RenderSection("scripts", required: false)
 </body>
 </html>

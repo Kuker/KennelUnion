@@ -1,4 +1,7 @@
-﻿.page-body {
+﻿body {
+  padding-top: 50px; }
+
+.page-body {
   background-color: mintcream;
   color: darkgray; }
 

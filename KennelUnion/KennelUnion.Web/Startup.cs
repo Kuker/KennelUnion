@@ -40,6 +40,7 @@ namespace KennelUnion.Web
             services.AddDbContext<DatabaseContext>();
 
             services.AddScoped<IRepository<News>, NewsRepository>();
+            services.AddScoped<IRepository<About>, AboutRepository>();
             services.AddTransient<Seed>();
 
             services.AddMvc();

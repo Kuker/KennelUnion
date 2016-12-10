@@ -2,7 +2,6 @@
 @{
     ViewData["Title"] = "Aktualności";
 }
-<div class=""></div>
 <h2>Aktualności</h2>
 
 @foreach (var news in Model)
@@ -10,4 +9,5 @@
     <h3>@news.Title</h3>
     <p>@news.Body</p>
     <p>@news.CreatedOn</p>
+    <a asp-action="Show" asp-route-id="@news.Id">Show more...</a>
 }

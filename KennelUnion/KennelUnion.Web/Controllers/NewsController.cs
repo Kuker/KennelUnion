@@ -25,5 +25,11 @@ namespace KennelUnion.Web.Properties.Controllers
             var news = _newsRepo.GetAll().OrderBy(x=>x.CreatedOn).Take(maxNewsPerPage);
             return View(news.ToList());
         }
+
+        public IActionResult Show(int id)
+        {
+            var news = _newsRepo.GetById(id);
+            return View(news);
+        }
     }
 }
