@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -34,10 +35,7 @@
                 <li ><a href="#">Historia</a></li>
                 <li ><a href="#">Kontakt</a></li>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Zaloguj</a></li>
-                <li><a href="#">Rejestracja</a></li>
-            </ul>
+            @await Html.PartialAsync("_LoginPartial")
         </div>
     </div>
 </nav>

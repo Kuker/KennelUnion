@@ -9,6 +9,7 @@ using KennelUnion.Data.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -39,6 +40,11 @@ namespace KennelUnion.Web
             services.AddSingleton(_config);
             services.AddDbContext<DatabaseContext>();
 
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<DatabaseContext>()
+                .AddDefaultTokenProviders();
+
+
             services.AddScoped<IRepository<News>, NewsRepository>();
             services.AddScoped<IRepository<About>, AboutRepository>();
             services.AddTransient<Seed>();
@@ -57,6 +63,7 @@ namespace KennelUnion.Web
             }
 
             app.UseStaticFiles();
+            app.UseIdentity();
 
             app.UseMvc(config =>
             {
