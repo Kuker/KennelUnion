@@ -44,15 +44,17 @@ namespace KennelUnion.Web.Properties.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(NewsViewModel news)
+        public IActionResult Edit(int id, NewsViewModel news)
         {
             if (!ModelState.IsValid)
                 return View(news);
-            
-            var newsModel = new News();
-            newsModel.Id = news.Id;
-            newsModel.Body = news.Body;
-            newsModel.Title = news.Title;
+
+            var newsModel = _newsRepo.GetById(id);
+            if (newsModel != null)
+            {
+                newsModel.Body = news.Body;
+                newsModel.Title = news.Title;
+            }
 
             _newsRepo.Edit(newsModel);
             _newsRepo.Save();
