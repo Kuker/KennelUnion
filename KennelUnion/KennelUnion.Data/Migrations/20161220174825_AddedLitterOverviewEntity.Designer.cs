@@ -8,9 +8,10 @@ using KennelUnion.Data;
 namespace KennelUnion.Data.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20161220174825_AddedLitterOverviewEntity")]
+    partial class AddedLitterOverviewEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")

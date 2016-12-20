@@ -1,4 +1,9 @@
-﻿@model List<KennelUnion.Data.Entities.News>
+﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity.EntityFrameworkCore
+
+@inject SignInManager<IdentityUser> SignInManager
+
+@model List<KennelUnion.Data.Entities.News>
 @{
     ViewData["Title"] = "Aktualności";
 }
@@ -9,5 +14,9 @@
     <h3>@news.Title</h3>
     <p>@news.Body</p>
     <p>@news.CreatedOn</p>
-    <a asp-action="Show" asp-route-id="@news.Id">Show more...</a>
+    <a asp-action="Show" asp-route-id="@news.Id">Czytaj więcej...</a>
+    if (SignInManager.IsSignedIn(User))
+     {
+         <a asp-action="Edit" asp-route-id="@news.Id">Edytuj</a>
+     }
 }

@@ -3,7 +3,7 @@
 $(document).ready(function () {
     var url = window.location;
     $('#navbar').find('.active').removeClass('active');
-    $('#navbar ul a').each(function () {
+    $('#navbar ul > li > a').each(function () {
         if (this.href == url) {
             $(this).parent().addClass('active');
         }

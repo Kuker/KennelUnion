@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using KennelUnion.Data.Entities;
 using KennelUnion.Data.Repositories;
+using KennelUnion.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KennelUnion.Web.Properties.Controllers
@@ -30,6 +31,34 @@ namespace KennelUnion.Web.Properties.Controllers
         {
             var news = _newsRepo.GetById(id);
             return View(news);
+        }
+
+        public IActionResult Edit(int id = 0)
+        {
+            var news = _newsRepo.GetById(id);
+            if (news == null)
+            {
+                return NotFound();
+            }
+            return View(news);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(NewsViewModel news)
+        {
+            if (!ModelState.IsValid)
+                return View(news);
+            
+            var newsModel = new News();
+            newsModel.Id = news.Id;
+            newsModel.Body = news.Body;
+            newsModel.Title = news.Title;
+
+            _newsRepo.Edit(newsModel);
+            _newsRepo.Save();
+
+            return RedirectToAction("Show","News", new {id=newsModel.Id});
+
         }
     }
 }

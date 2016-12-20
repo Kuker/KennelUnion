@@ -12,11 +12,13 @@ namespace KennelUnion.Web.Controllers
 {
     public class FormsController : Controller
     {
-        private readonly IRepository<DogRegistry> _repo;
+        private readonly IRepository<DogRegistry> _dogRegistryRepo;
+        private readonly IRepository<LitterOverview> _litterOverviewRepo;
 
-        public FormsController(IRepository<DogRegistry> repo)
+        public FormsController(IRepository<DogRegistry> dogRegistryRepo, IRepository<LitterOverview> litterOverviewRepo)
         {
-            _repo = repo;
+            _dogRegistryRepo = dogRegistryRepo;
+            _litterOverviewRepo = litterOverviewRepo;
         }
 
         public IActionResult DogRegistry()
@@ -58,8 +60,8 @@ namespace KennelUnion.Web.Controllers
 
             dogRegistryModel.Breeder.Dog = dogRegistryModel.Dog;
 
-            _repo.Add(dogRegistryModel);
-            _repo.Save();
+            _dogRegistryRepo.Add(dogRegistryModel);
+            _dogRegistryRepo.Save();
 
             return RedirectToAction("Index","News");
         }
@@ -69,9 +71,49 @@ namespace KennelUnion.Web.Controllers
             return View();
         }
 
-        public IActionResult DogOverview()
+        public IActionResult LitterOverview()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult LitterOverview(LitterOverviewViewModel model)
+        {
+            if(!ModelState.IsValid)
+                return View(model);
+
+            var litterOverview = new LitterOverview();
+
+            litterOverview.BirthDate = model.BirthDate;
+            litterOverview.Breed = model.Breed;
+            litterOverview.CreatedOn = DateTime.Now;
+            litterOverview.Description = model.Description;
+            litterOverview.Father = model.Father;
+            litterOverview.FatherRegistrationNumber = model.FatherRegistrationNumber;
+            litterOverview.MatingDate = model.MatingDate;
+            litterOverview.Mother = model.Mother;
+            litterOverview.MotherRegistrationNumber = model.MotherRegistrationNumber;
+            litterOverview.Name = model.Name;
+            litterOverview.Owner = model.Owner;
+
+            litterOverview.Pups = new List<Pup>();
+            for (var i = 0; i < 8; i++)
+            {
+                var pup = new Pup
+                {
+                    Chip = model.Pups[i].Chip,
+                    Color = model.Pups[i].Color,
+                    CreatedOn = DateTime.Now,
+                    Name = model.Pups[i].Name,
+                    Sex = model.Pups[i].Sex
+                };
+                litterOverview.Pups.Add(pup);
+            }
+
+            _litterOverviewRepo.Add(litterOverview);
+            _litterOverviewRepo.Save();
+
+            return RedirectToAction("Index","News");
         }
     }
 }

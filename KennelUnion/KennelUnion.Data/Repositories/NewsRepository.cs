@@ -20,7 +20,7 @@ namespace KennelUnion.Data.Repositories
 
         public News GetById(int id)
         {
-            return _db.NewsSet.FirstOrDefault(x => x.Id == id);
+            return _db.NewsSet.First(x => x.Id == id);
         }
 
         public IQueryable<News> GetAll()

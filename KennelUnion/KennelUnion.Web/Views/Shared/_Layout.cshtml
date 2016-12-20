@@ -31,10 +31,17 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li class="active"><a asp-controller="News" asp-action="Index">Strona główna</a></li>
-                <li ><a asp-controller="Info" asp-action="About">O nas</a></li>
-                <li><a asp-controller="Forms" asp-action="DogRegistry">Zarejestruj psa</a></li>
-                <li ><a href="#">Historia</a></li>
-                <li ><a href="#">Kontakt</a></li>
+                <li><a asp-controller="Info" asp-action="About">O nas</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Formularze <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a asp-controller="Forms" asp-action="DogRegistry">Zarejestruj psa</a></li>
+                        <li><a asp-controller="Forms" asp-action="LitterOverview">Przegląd miotu</a></li>
+                        <li><a asp-controller="Forms" asp-action="MembershipDeclaration">Deklaracja członkostwa</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Historia</a></li>
+                <li><a href="#">Kontakt</a></li>
             </ul>
             @await Html.PartialAsync("_LoginPartial")
         </div>

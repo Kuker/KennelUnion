@@ -17,5 +17,7 @@ namespace KennelUnion.Data.Entities
         public string Email { get; set; }
 
         public Dog Dog { get; set; }
+
+        public DateTime CreatedOn { get; set; }
     }
 }
