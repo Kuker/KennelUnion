@@ -33,5 +33,6 @@ namespace KennelUnion.Data
         public DbSet<DogRegistry> DogRegistries { get; set; }
         public DbSet<LitterOverview> LitterOverviews { get; set; }
         public DbSet<Pup> Pups { get; set; }
+        public DbSet<MembershipDeclaration> MembershipDeclarations { get; set; }
     }
 }

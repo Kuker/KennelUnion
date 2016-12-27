@@ -14,11 +14,13 @@ namespace KennelUnion.Web.Controllers
     {
         private readonly IRepository<DogRegistry> _dogRegistryRepo;
         private readonly IRepository<LitterOverview> _litterOverviewRepo;
+        private readonly IRepository<MembershipDeclaration> _membershipRepository;
 
-        public FormsController(IRepository<DogRegistry> dogRegistryRepo, IRepository<LitterOverview> litterOverviewRepo)
+        public FormsController(IRepository<DogRegistry> dogRegistryRepo, IRepository<LitterOverview> litterOverviewRepo, IRepository<MembershipDeclaration> membershipRepository)
         {
             _dogRegistryRepo = dogRegistryRepo;
             _litterOverviewRepo = litterOverviewRepo;
+            _membershipRepository = membershipRepository;
         }
 
         public IActionResult DogRegistry()
@@ -71,6 +73,34 @@ namespace KennelUnion.Web.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult MembershipDeclaration(MembershipDeclarationViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var membershipDeclaration = new MembershipDeclaration
+            {
+                Name = model.Name,
+                Lastname = model.Lastname,
+                Street = model.Street,
+                Post = model.Post,
+                Location = model.Location,
+                PhoneNumber = model.PhoneNumber,
+                Email = model.Email,
+                Contibution = model.Contribution,
+                Nickname1 = model.Nickname1,
+                Nickname2 = model.Nickname2,
+                Nickname3 = model.Nickname3,
+                CreatedOn = DateTime.Now
+            };
+
+            _membershipRepository.Add(membershipDeclaration);
+            _membershipRepository.Save();
+
+            return RedirectToAction("Index", "News");
+        }
+
         public IActionResult LitterOverview()
         {
             return View();
@@ -82,21 +112,23 @@ namespace KennelUnion.Web.Controllers
             if(!ModelState.IsValid)
                 return View(model);
 
-            var litterOverview = new LitterOverview();
+            var litterOverview = new LitterOverview
+            {
+                BirthDate = model.BirthDate,
+                Breed = model.Breed,
+                CreatedOn = DateTime.Now,
+                Description = model.Description,
+                Father = model.Father,
+                FatherRegistrationNumber = model.FatherRegistrationNumber,
+                MatingDate = model.MatingDate,
+                Mother = model.Mother,
+                MotherRegistrationNumber = model.MotherRegistrationNumber,
+                Name = model.Name,
+                Owner = model.Owner,
+                Pups = new List<Pup>()
+            };
 
-            litterOverview.BirthDate = model.BirthDate;
-            litterOverview.Breed = model.Breed;
-            litterOverview.CreatedOn = DateTime.Now;
-            litterOverview.Description = model.Description;
-            litterOverview.Father = model.Father;
-            litterOverview.FatherRegistrationNumber = model.FatherRegistrationNumber;
-            litterOverview.MatingDate = model.MatingDate;
-            litterOverview.Mother = model.Mother;
-            litterOverview.MotherRegistrationNumber = model.MotherRegistrationNumber;
-            litterOverview.Name = model.Name;
-            litterOverview.Owner = model.Owner;
 
-            litterOverview.Pups = new List<Pup>();
             for (var i = 0; i < 8; i++)
             {
                 var pup = new Pup

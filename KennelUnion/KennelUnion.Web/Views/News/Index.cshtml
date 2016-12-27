@@ -12,7 +12,7 @@
 @foreach (var news in Model)
 {
     <h3>@news.Title</h3>
-    <p>@news.Body</p>
+    <p>@news.Preview</p>
     <p>@news.CreatedOn</p>
     <a asp-action="Show" asp-route-id="@news.Id">Czytaj więcej...</a>
     if (SignInManager.IsSignedIn(User))

@@ -8,9 +8,10 @@ using KennelUnion.Data;
 namespace KennelUnion.Data.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20161227100927_AddedMembershipEntity")]
+    partial class AddedMembershipEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")
@@ -204,8 +205,6 @@ namespace KennelUnion.Data.Migrations
                     b.Property<string>("Body");
 
                     b.Property<DateTime>("CreatedOn");
-
-                    b.Property<string>("Preview");
 
                     b.Property<string>("Title");
 

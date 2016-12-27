@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using KennelUnion.Data.Entities;
 using KennelUnion.Data.Repositories;
 using KennelUnion.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KennelUnion.Web.Properties.Controllers
@@ -33,6 +34,7 @@ namespace KennelUnion.Web.Properties.Controllers
             return View(news);
         }
 
+        [Authorize]
         public IActionResult Edit(int id = 0)
         {
             var news = _newsRepo.GetById(id);
@@ -44,6 +46,7 @@ namespace KennelUnion.Web.Properties.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Edit(int id, NewsViewModel news)
         {
             if (!ModelState.IsValid)
