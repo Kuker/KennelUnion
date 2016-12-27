@@ -23,5 +23,7 @@ namespace KennelUnion.Data.Entities
         public string Nickname1 { get; set; }
         public string Nickname2 { get; set; }
         public string Nickname3 { get; set; }
+
+        public bool IsApproved { get; set; }
     }
 }

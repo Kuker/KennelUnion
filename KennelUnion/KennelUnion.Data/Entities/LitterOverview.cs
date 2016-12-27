@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KennelUnion.Data.Entities
 {
@@ -26,5 +23,6 @@ namespace KennelUnion.Data.Entities
 
         public DateTime CreatedOn { get; set; }
 
+        public bool IsApproved { get; set; }
     }
 }
