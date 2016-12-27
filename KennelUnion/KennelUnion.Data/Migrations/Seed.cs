@@ -37,7 +37,8 @@ namespace KennelUnion.Data.Migrations
                         titlesSeparated[random.Next(max)],
                     CreatedOn = DateTime.Now,
                     UpdatedOn = DateTime.Now,
-                    Body = randomBody
+                    Body = randomBody,
+                    Preview = randomBody.Substring(0, 100)
                 };
                 _newsRepo.Add(news);
             }

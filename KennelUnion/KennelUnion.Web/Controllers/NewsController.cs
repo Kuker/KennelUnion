@@ -7,24 +7,30 @@ using KennelUnion.Data.Entities;
 using KennelUnion.Data.Repositories;
 using KennelUnion.Web.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace KennelUnion.Web.Properties.Controllers
 {
     public class NewsController : Controller
     {
+
+        private readonly UserManager<IdentityUser> userManager;
         private readonly IRepository<News> _newsRepo;
         private int maxNewsPerPage { get; set; }
 
-        public NewsController(IRepository<News> newsRepo)
+        public NewsController(IRepository<News> newsRepo, UserManager<IdentityUser> userManager)
         {
             _newsRepo = newsRepo;
+            this.userManager = userManager;
             maxNewsPerPage = 10;
         }
 
         public IActionResult Index()
         {
-            var news = _newsRepo.GetAll().OrderBy(x=>x.CreatedOn).Take(maxNewsPerPage);
+            var news = _newsRepo.GetAll().Include(x=>x.Author).OrderByDescending(x=>x.CreatedOn).Take(maxNewsPerPage);
             return View(news.ToList());
         }
 
@@ -57,6 +63,8 @@ namespace KennelUnion.Web.Properties.Controllers
             {
                 newsModel.Body = news.Body;
                 newsModel.Title = news.Title;
+                newsModel.Preview = news.Preview;
+                newsModel.UpdatedOn = DateTime.Now;
             }
 
             _newsRepo.Edit(newsModel);

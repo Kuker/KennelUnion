@@ -1,18 +1,19 @@
 ﻿@model KennelUnion.Data.Entities.News
 
 @{
-    ViewData["Title"] = "Edytuj ogłoszenie";
+    ViewBag.Title = "Dodaj aktualność";
 }
 
-<h1>Edytuj</h1>
-<form asp-controller="News" asp-action="Edit" method="post">
+<h1>@ViewBag.Title</h1>
+
+<form asp-controller="AdminPanel" asp-action="AddNews" method="post">
     <div class="form-group">
         <label asp-for="Title"></label>
-        <input asp-for="Title"/>
+        <input class="form-control" asp-for="Title" />
     </div>
     <div class="form-group">
         <label asp-for="Preview"></label>
-        <input asp-for="Preview"/>
+        <input class="form-control" asp-for="Preview" />
     </div>
     @await Html.PartialAsync("_HtmlEditor")
     @Html.TextAreaFor(model => model.Body)

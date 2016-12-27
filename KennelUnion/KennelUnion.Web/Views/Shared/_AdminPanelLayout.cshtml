@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    @await Html.PartialAsync("_HeadMain")
+    <style>
+        body {
+            padding-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3">
+                @await Html.PartialAsync("_SideNavbar")
+            </div>
+            <div class="col-lg-9">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <environment names="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/main.js"></script>
+    </environment>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -5,5 +5,6 @@
 }
 
 <h2>@Model.Title</h2>
+<p>@Model.Preview</p>
 <div class="wrap-words">@Html.Raw(Model.Body)</div>
-<p>@Model.CreatedOn</p>
+<p>Utworzono @Model.CreatedOn przez @(Model.Author != null ? Model.Author.UserName : "Brak")</p>

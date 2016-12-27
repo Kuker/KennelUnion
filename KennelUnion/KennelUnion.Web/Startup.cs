@@ -49,6 +49,7 @@ namespace KennelUnion.Web
             services.AddScoped<IRepository<DogRegistry>, DogRegistryRepository>();
             services.AddScoped<IRepository<LitterOverview>, LitterOverviewRepository>();
             services.AddScoped<IRepository<MembershipDeclaration>, MembershipDeclarationRepository>();
+
             services.AddTransient<Seed>();
 
             services.AddMvc();
@@ -75,7 +76,7 @@ namespace KennelUnion.Web
                 );
             });
 
-            seeder.PopulateDb();
+        //    seeder.PopulateDb();
         }
     }
 }

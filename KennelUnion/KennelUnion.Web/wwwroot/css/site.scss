@@ -7,3 +7,10 @@ body {
     background-color: mintcream;
     color: darkgray;
 }
+
+.wrap-words {
+    p {
+        word-wrap: break-word;
+    }
+}
+@import 'navbar-fixed-side.scss';

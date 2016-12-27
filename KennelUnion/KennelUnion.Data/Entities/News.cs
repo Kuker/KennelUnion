@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace KennelUnion.Data.Entities
 {
@@ -19,5 +20,7 @@ namespace KennelUnion.Data.Entities
         public DateTime UpdatedOn { get; set; }
         
         public IEnumerable<Comment> Comments { get; set; }
+
+        public IdentityUser Author { get; set; }
     }
 }

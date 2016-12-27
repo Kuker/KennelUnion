@@ -1,0 +1,99 @@
+﻿@model System.Linq.IQueryable<KennelUnion.Data.Entities.News>
+
+@{
+    ViewBag.Title = "Przeglądaj aktualności";
+    Layout = "_AdminPanelLayout";
+}
+
+<h2>Przeglądaj aktualności</h2>
+<table class="table table-responsive table-striped table-condensed table-hover">
+    <tr>
+        <th>
+            Tytuł
+        </th>
+        <th>
+            Podgląd
+        </th>
+        <th>
+            Autor
+        </th>
+        <th>
+            Data utworzenia
+        </th>
+        <th>
+            Data modyfikacji
+        </th>
+        <th></th>
+    </tr>  
+    @foreach (var news in Model)
+    {
+        <tr>
+            <td>
+                @news.Title
+            </td>
+            <td>
+                @news.Preview
+            </td>
+            <td>
+                @if (news.Author != null)
+                {
+                    @news.Author.UserName
+                }
+                else
+                {
+                    @: Brak
+                }
+            </td>
+            <td>
+                @news.CreatedOn
+            </td>
+            <td>
+                @news.UpdatedOn
+            </td>
+            <td>
+                <a asp-action="ShowNews" asp-route-id="@news.Id">Podgląd</a> |
+                <a asp-action="EditNews" asp-route-id="@news.Id">Edytuj</a> |
+                <a asp-action="DeleteNews" asp-route-id="@news.Id">Usuń</a>
+            </td>
+        </tr>
+    }
+</table>
+<ul class="pagination">
+    @if (ViewBag.Page > 0)
+    {
+        <li><a asp-action="BrowseNews" asp-route-page="@(ViewBag.Page - 1)">Poprzednia strona</a></li>
+    }
+
+    @if (ViewBag.Page > 3)
+    {
+        <li><a asp-action="BrowseNews" asp-route-page="@(ViewBag.Page - 3)">@(ViewBag.Page - 3)</a></li>
+    }
+    @if (ViewBag.Page > 2)
+    {
+        <li><a asp-action="BrowseNews" asp-route-page="@(ViewBag.Page - 2)">@(ViewBag.Page - 2)</a></li>
+    }
+    @if (ViewBag.Page > 1)
+    {
+        <li><a asp-action="BrowseNews" asp-route-page="@(ViewBag.Page - 1)">@(ViewBag.Page - 1)</a></li>
+    }
+
+    <li class="active"><a>@(ViewBag.Page)</a></li>
+
+    @if (ViewBag.Page < ViewBag.PagesCount)
+    {
+        <li><a asp-action="BrowseNews" asp-route-page="@(ViewBag.Page + 1)">@(ViewBag.Page + 1)</a></li>
+    }
+    @if (ViewBag.Page < ViewBag.PagesCount - 1)
+    {
+        <li><a asp-action="BrowseNews" asp-route-page="@(ViewBag.Page + 2)">@(ViewBag.Page + 2)</a></li>
+    }
+    @if (ViewBag.Page < ViewBag.PagesCount - 2)
+    {
+        <li><a asp-action="BrowseNews" asp-route-page="@(ViewBag.Page + 3)">@(ViewBag.Page + 3)</a></li>
+    }
+
+    @if (ViewBag.Page < ViewBag.PagesCount)
+    {
+        <li><a asp-action="BrowseNews" asp-route-page="@(ViewBag.Page + 1)">Następna strona</a></li>
+    }
+</ul>
