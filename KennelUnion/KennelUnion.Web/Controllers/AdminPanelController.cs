@@ -23,12 +23,13 @@ namespace KennelUnion.Web.Controllers
         private readonly IRepository<MembershipDeclaration> _membershipDeclarationRepository;
         private readonly IRepository<About> _aboutRepository;
         private readonly IRepository<History> _historyRepository;
+        private readonly IRepository<Contact> _contactRepository;
 
         private readonly UserManager<IdentityUser> _userManager;
 
         public AdminPanelController(UserManager<IdentityUser> userManager, IRepository<News> newsRepository,
             IRepository<DogRegistry> dogRegistryRepository, IRepository<LitterOverview> litterOverviewRepository,
-            IRepository<MembershipDeclaration> membershipDeclarationRepository, IRepository<About> aboutRepository, IRepository<History> historyRepository)
+            IRepository<MembershipDeclaration> membershipDeclarationRepository, IRepository<About> aboutRepository, IRepository<History> historyRepository, IRepository<Contact> contactRepository)
         {
             this._userManager = userManager;
             _newsRepository = newsRepository;
@@ -37,6 +38,7 @@ namespace KennelUnion.Web.Controllers
             _membershipDeclarationRepository = membershipDeclarationRepository;
             _aboutRepository = aboutRepository;
             _historyRepository = historyRepository;
+            _contactRepository = contactRepository;
         }
 
         public IActionResult Index()
@@ -221,6 +223,26 @@ namespace KennelUnion.Web.Controllers
 
             _historyRepository.Edit(history);
             _historyRepository.Save();
+
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult EditContact()
+        {
+            var contact = _contactRepository.GetAll().Last();
+
+            return View(contact);
+        }
+
+        [HttpPost]
+        public IActionResult EditContact(int id, Contact contactVm)
+        {
+            var contact = _contactRepository.GetById(id);
+
+            contact.Content = contactVm.Content;
+
+            _contactRepository.Edit(contact);
+            _contactRepository.Save();
 
             return RedirectToAction("Index");
         }
