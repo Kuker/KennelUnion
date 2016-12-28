@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using KennelUnion.Data.Entities;
@@ -20,15 +21,19 @@ namespace KennelUnion.Web.Controllers
         private readonly IRepository<DogRegistry> _dogRegistryRepository;
         private readonly IRepository<LitterOverview> _litterOverviewRepository;
         private readonly IRepository<MembershipDeclaration> _membershipDeclarationRepository;
+        private readonly IRepository<About> _aboutRepository;
         private readonly UserManager<IdentityUser> _userManager;
 
-        public AdminPanelController(UserManager<IdentityUser> userManager, IRepository<News> newsRepository, IRepository<DogRegistry> dogRegistryRepository, IRepository<LitterOverview> litterOverviewRepository, IRepository<MembershipDeclaration> membershipDeclarationRepository)
+        public AdminPanelController(UserManager<IdentityUser> userManager, IRepository<News> newsRepository,
+            IRepository<DogRegistry> dogRegistryRepository, IRepository<LitterOverview> litterOverviewRepository,
+            IRepository<MembershipDeclaration> membershipDeclarationRepository, IRepository<About> aboutRepository)
         {
             this._userManager = userManager;
             _newsRepository = newsRepository;
             _dogRegistryRepository = dogRegistryRepository;
             _litterOverviewRepository = litterOverviewRepository;
             _membershipDeclarationRepository = membershipDeclarationRepository;
+            _aboutRepository = aboutRepository;
         }
 
         public IActionResult Index()
@@ -62,19 +67,19 @@ namespace KennelUnion.Web.Controllers
             _newsRepository.Add(news);
             _newsRepository.Save();
 
-            return RedirectToAction("BrowseNews","AdminPanel");
+            return RedirectToAction("BrowseNews", "AdminPanel");
 
         }
 
         public IActionResult BrowseNews(int page = 1, int maxPerPage = 15)
         {
-            ViewBag.PagesCount = (int)Math.Ceiling((decimal)_newsRepository.GetAll().Count()/maxPerPage);
+            ViewBag.PagesCount = (int) Math.Ceiling((decimal) _newsRepository.GetAll().Count()/maxPerPage);
             ViewBag.Page = page;
             ViewBag.MaxPerPage = maxPerPage;
             var news = _newsRepository.GetAll()
-                .Include(x=>x.Author)
-                .OrderByDescending(x=>x.UpdatedOn)
-                .Skip((page - 1) * maxPerPage)
+                .Include(x => x.Author)
+                .OrderByDescending(x => x.UpdatedOn)
+                .Skip((page - 1)*maxPerPage)
                 .Take(maxPerPage);
             return View(news);
         }
@@ -141,8 +146,8 @@ namespace KennelUnion.Web.Controllers
 
         public IActionResult ShowLitterOverview(int id = 0)
         {
-            var overview = _litterOverviewRepository.FindBy(x=>x.Id == id)
-                .Include(x=>x.Pups)
+            var overview = _litterOverviewRepository.FindBy(x => x.Id == id)
+                .Include(x => x.Pups)
                 .FirstOrDefault();
 
             return View(overview);
@@ -159,7 +164,8 @@ namespace KennelUnion.Web.Controllers
 
         public IActionResult BrowseMembershipDeclarations(int page = 1, int maxPerPage = 15)
         {
-            ViewBag.PagesCount = (int) Math.Ceiling((decimal) _membershipDeclarationRepository.GetAll().Count()/maxPerPage);
+            ViewBag.PagesCount =
+                (int) Math.Ceiling((decimal) _membershipDeclarationRepository.GetAll().Count()/maxPerPage);
             ViewBag.Page = page;
             ViewBag.MaxPerPage = maxPerPage;
             var declarations = _membershipDeclarationRepository.GetAll()
@@ -176,6 +182,24 @@ namespace KennelUnion.Web.Controllers
             _membershipDeclarationRepository.Edit(declaration);
             _membershipDeclarationRepository.Save();
             return RedirectToAction("BrowseMembershipDeclarations");
+        }
+
+        public IActionResult EditAbout()
+        {
+            var about = _aboutRepository.GetAll().Last();
+
+            return View(about);
+        }
+
+        [HttpPost]
+        public IActionResult EditAbout(int id, About aboutVm)
+        {
+            var about = _aboutRepository.GetById(id);
+            about.Content = aboutVm.Content;
+            _aboutRepository.Edit(about);
+            _aboutRepository.Save();
+
+            return RedirectToAction("Index");
         }
     }
 }

@@ -1,0 +1,15 @@
+﻿@model KennelUnion.Data.Entities.About
+
+@{
+    ViewBag.Title = "Edytuj stronę \"O nas\"";
+}
+
+<h1>Edytuj stronę "O nas"</h1>
+<form asp-action="EditAbout" method="post" class="form-horizontal">
+    <div class="form-group">
+        @await Html.PartialAsync("_HtmlEditor")
+        @Html.TextAreaFor(model => model.Content)
+    </div>
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-success">Wyślij</button>
+</form>
