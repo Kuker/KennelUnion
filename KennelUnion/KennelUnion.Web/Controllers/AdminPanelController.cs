@@ -22,11 +22,13 @@ namespace KennelUnion.Web.Controllers
         private readonly IRepository<LitterOverview> _litterOverviewRepository;
         private readonly IRepository<MembershipDeclaration> _membershipDeclarationRepository;
         private readonly IRepository<About> _aboutRepository;
+        private readonly IRepository<History> _historyRepository;
+
         private readonly UserManager<IdentityUser> _userManager;
 
         public AdminPanelController(UserManager<IdentityUser> userManager, IRepository<News> newsRepository,
             IRepository<DogRegistry> dogRegistryRepository, IRepository<LitterOverview> litterOverviewRepository,
-            IRepository<MembershipDeclaration> membershipDeclarationRepository, IRepository<About> aboutRepository)
+            IRepository<MembershipDeclaration> membershipDeclarationRepository, IRepository<About> aboutRepository, IRepository<History> historyRepository)
         {
             this._userManager = userManager;
             _newsRepository = newsRepository;
@@ -34,6 +36,7 @@ namespace KennelUnion.Web.Controllers
             _litterOverviewRepository = litterOverviewRepository;
             _membershipDeclarationRepository = membershipDeclarationRepository;
             _aboutRepository = aboutRepository;
+            _historyRepository = historyRepository;
         }
 
         public IActionResult Index()
@@ -198,6 +201,26 @@ namespace KennelUnion.Web.Controllers
             about.Content = aboutVm.Content;
             _aboutRepository.Edit(about);
             _aboutRepository.Save();
+
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult EditHistory()
+        {
+            var history = _historyRepository.GetAll().Last();
+
+            return View(history);
+        }
+
+        [HttpPost]
+        public IActionResult EditHistory(int id, History historyVm)
+        {
+            var history = _historyRepository.GetById(id);
+
+            history.Content = historyVm.Content;
+
+            _historyRepository.Edit(history);
+            _historyRepository.Save();
 
             return RedirectToAction("Index");
         }

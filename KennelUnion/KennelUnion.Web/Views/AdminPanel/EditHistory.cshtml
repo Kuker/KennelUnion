@@ -1,0 +1,13 @@
+﻿@model KennelUnion.Data.Entities.History
+
+@{
+    ViewBag.Title = "Edytuj stronę Historia";
+}
+
+<h1>Edytuj stronę Historia</h1>
+<form asp-action="EditHistory" method="post" class="form-horizontal">
+@await Html.PartialAsync("_HtmlEditor")
+@Html.TextAreaFor(m => m.Content)
+<input type="hidden" asp-for="Id" />
+<button type="submit" class="btn btn-success">Wyślij</button>    
+</form>
