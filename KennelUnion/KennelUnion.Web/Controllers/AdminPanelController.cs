@@ -168,6 +168,15 @@ namespace KennelUnion.Web.Controllers
                 .Take(maxPerPage);
             return View(declarations);
         }
+
+        public IActionResult AcceptMembershipDeclaration(int id = 0)
+        {
+            var declaration = _membershipDeclarationRepository.GetById(id);
+            declaration.IsApproved = true;
+            _membershipDeclarationRepository.Edit(declaration);
+            _membershipDeclarationRepository.Save();
+            return RedirectToAction("BrowseMembershipDeclarations");
+        }
     }
 }
 
