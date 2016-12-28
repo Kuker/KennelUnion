@@ -29,6 +29,7 @@ namespace KennelUnion.Data
         public DbSet<Comment> Comments { get; set; }
         public DbSet<About> Abouts { get; set; }
         public DbSet<History> Histories { get; set; }
+        public DbSet<Contact> Contacts { get; set; }
         public DbSet<Dog> Dogs { get; set; }
         public DbSet<Breeder> Breeders { get; set; }
         public DbSet<DogRegistry> DogRegistries { get; set; }

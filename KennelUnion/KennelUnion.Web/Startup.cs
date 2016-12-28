@@ -47,6 +47,7 @@ namespace KennelUnion.Web
             services.AddScoped<IRepository<News>, NewsRepository>();
             services.AddScoped<IRepository<About>, AboutRepository>();
             services.AddScoped<IRepository<History>, HistoryRepository>();
+            services.AddScoped<IRepository<Contact>, ContactRepository>();
             services.AddScoped<IRepository<DogRegistry>, DogRegistryRepository>();
             services.AddScoped<IRepository<LitterOverview>, LitterOverviewRepository>();
             services.AddScoped<IRepository<MembershipDeclaration>, MembershipDeclarationRepository>();
