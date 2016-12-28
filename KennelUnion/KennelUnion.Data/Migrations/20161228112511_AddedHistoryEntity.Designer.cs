@@ -8,9 +8,10 @@ using KennelUnion.Data;
 namespace KennelUnion.Data.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20161228112511_AddedHistoryEntity")]
+    partial class AddedHistoryEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")
@@ -25,9 +26,14 @@ namespace KennelUnion.Data.Migrations
 
                     b.Property<DateTime>("CreatedOn");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
+
                     b.HasKey("Id");
 
                     b.ToTable("Abouts");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("About");
                 });
 
             modelBuilder.Entity("KennelUnion.Data.Entities.Breeder", b =>
@@ -128,20 +134,6 @@ namespace KennelUnion.Data.Migrations
                     b.HasIndex("DogId");
 
                     b.ToTable("DogRegistries");
-                });
-
-            modelBuilder.Entity("KennelUnion.Data.Entities.History", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Content");
-
-                    b.Property<DateTime>("CreatedOn");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Histories");
                 });
 
             modelBuilder.Entity("KennelUnion.Data.Entities.LitterOverview", b =>
@@ -417,6 +409,16 @@ namespace KennelUnion.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("KennelUnion.Data.Entities.History", b =>
+                {
+                    b.HasBaseType("KennelUnion.Data.Entities.About");
+
+
+                    b.ToTable("History");
+
+                    b.HasDiscriminator().HasValue("History");
                 });
 
             modelBuilder.Entity("KennelUnion.Data.Entities.Breeder", b =>
