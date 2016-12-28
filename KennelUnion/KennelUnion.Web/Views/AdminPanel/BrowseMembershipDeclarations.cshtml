@@ -22,7 +22,7 @@
         </tr>
         @foreach (var declaration in Model)
         {
-            <tr>
+            <tr class="@(declaration.IsApproved ? "success" : "danger")">
                 <td>@declaration.Name</td>
                 <td>@declaration.Lastname</td>
                 <td>@declaration.Street</td>
