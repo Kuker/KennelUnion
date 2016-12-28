@@ -1,0 +1,125 @@
+﻿@model System.Linq.IQueryable<KennelUnion.Data.Entities.LitterOverview>
+
+@{
+    ViewBag.Title = "Przeglądy miotów";
+}
+
+<h1>Przeglądy miotów</h1>
+<div class="table-responsive">
+    <table class="table table-condensed table-striped">
+        <thead>
+        <tr>
+            <th>
+                Nazwa hodowli
+            </th>
+            <th>
+                Właściciel hodowli
+            </th>
+            <th>
+                Rasa
+            </th>
+            <th>
+                Rodzice
+            </th>
+            <th>
+                Data krycia
+            </th>
+            <th>
+                Data urodzenia zwierząt
+            </th>
+            <th>
+                Opis
+            </th>
+            <th>
+                Zaakceptowano
+            </th>
+            <th>
+                
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var overview in Model)
+        {
+            <tr class="@(overview.IsApproved ? "success" : "danger")">
+                <td>
+                    @overview.Name
+                </td>
+                <td>
+                    @overview.Owner
+                </td>
+                <td>
+                    @overview.Breed
+                </td>
+                <td>
+                    @overview.Father #@overview.FatherRegistrationNumber <br/>
+                    @overview.Mother #@overview.MotherRegistrationNumber
+                </td>
+                <td>
+                    @overview.MatingDate
+                </td>
+                <td>
+                    @overview.BirthDate
+                </td>
+                <td>
+                    @overview.Description
+                </td>
+                <td>
+                    @if (overview.IsApproved)
+                    {
+                        @: Tak
+                    }
+                    else
+                    {
+                        @: Nie 
+                        <br/>
+                        <a asp-action="AcceptOverview" asp-route-id="@overview.Id">(Akceptuj)</a>
+                    }
+                </td>
+                <td>
+                    <a asp-action="" asp-route-id="@overview.Id">Podgląd</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+<ul class="pagination">
+    @if (ViewBag.Page > 1)
+    {
+        <li><a asp-action="BrowseLitterOverviews" asp-route-page="@(ViewBag.Page - 1)">Poprzednia strona</a></li>
+    }
+
+    @if (ViewBag.Page > 3)
+    {
+        <li><a asp-action="BrowseLitterOverviews" asp-route-page="@(ViewBag.Page - 3)">@(ViewBag.Page - 3)</a></li>
+    }
+    @if (ViewBag.Page > 2)
+    {
+        <li><a asp-action="BrowseLitterOverviews" asp-route-page="@(ViewBag.Page - 2)">@(ViewBag.Page - 2)</a></li>
+    }
+    @if (ViewBag.Page > 1)
+    {
+        <li><a asp-action="BrowseLitterOverviews" asp-route-page="@(ViewBag.Page - 1)">@(ViewBag.Page - 1)</a></li>
+    }
+
+    <li class="active"><a>@(ViewBag.Page)</a></li>
+
+    @if (ViewBag.Page < ViewBag.PagesCount)
+    {
+        <li><a asp-action="BrowseLitterOverviews" asp-route-page="@(ViewBag.Page + 1)">@(ViewBag.Page + 1)</a></li>
+    }
+    @if (ViewBag.Page < ViewBag.PagesCount - 1)
+    {
+        <li><a asp-action="BrowseLitterOverviews" asp-route-page="@(ViewBag.Page + 2)">@(ViewBag.Page + 2)</a></li>
+    }
+    @if (ViewBag.Page < ViewBag.PagesCount - 2)
+    {
+        <li><a asp-action="BrowseLitterOverviews" asp-route-page="@(ViewBag.Page + 3)">@(ViewBag.Page + 3)</a></li>
+    }
+
+    @if (ViewBag.Page < ViewBag.PagesCount)
+    {
+        <li><a asp-action="BrowseLitterOverviews" asp-route-page="@(ViewBag.Page + 1)">Następna strona</a></li>
+    }
+</ul>

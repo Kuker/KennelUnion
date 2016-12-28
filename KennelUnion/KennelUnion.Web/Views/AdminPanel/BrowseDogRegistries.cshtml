@@ -32,7 +32,6 @@
             <th>Chip</th>
             <th>Data wysłania</th>
             <th>Zaakceptowano</th>
-            <th></th>
         </tr>
         @foreach (var registry in Model)
         {
@@ -85,7 +84,6 @@
                         <a asp-action="AcceptRegistry" asp-route-id="@registry.Id">(Akceptuj)</a>
                     </td>
                 }
-                <td><a asp-action="" asp-route-id="@registry.Id">Podgląd</a></td>
             </tr>
         }
     </table>

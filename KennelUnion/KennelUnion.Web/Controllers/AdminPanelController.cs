@@ -18,13 +18,15 @@ namespace KennelUnion.Web.Controllers
     {
         private readonly IRepository<News> _newsRepository;
         private readonly IRepository<DogRegistry> _dogRegistryRepository;
+        private readonly IRepository<LitterOverview> _litterOverviewRepository;
         private readonly UserManager<IdentityUser> _userManager;
 
-        public AdminPanelController(UserManager<IdentityUser> userManager, IRepository<News> newsRepository, IRepository<DogRegistry> dogRegistryRepository)
+        public AdminPanelController(UserManager<IdentityUser> userManager, IRepository<News> newsRepository, IRepository<DogRegistry> dogRegistryRepository, IRepository<LitterOverview> litterOverviewRepository)
         {
             this._userManager = userManager;
             _newsRepository = newsRepository;
             _dogRegistryRepository = dogRegistryRepository;
+            _litterOverviewRepository = litterOverviewRepository;
         }
 
         public IActionResult Index()
@@ -120,6 +122,35 @@ namespace KennelUnion.Web.Controllers
             _dogRegistryRepository.Edit(registry);
             _dogRegistryRepository.Save();
             return RedirectToAction("BrowseDogRegistries");
+        }
+
+        public IActionResult BrowseLitterOverviews(int page = 1, int maxPerPage = 15)
+        {
+            ViewBag.PagesCount = (int) Math.Ceiling((decimal) _litterOverviewRepository.GetAll().Count()/maxPerPage);
+            ViewBag.Page = page;
+            ViewBag.MaxPerPage = maxPerPage;
+            var overviews = _litterOverviewRepository.GetAll()
+                .Include(x => x.Pups)
+                .OrderByDescending(x => x.CreatedOn)
+                .Skip((page - 1)*maxPerPage)
+                .Take(maxPerPage);
+            return View(overviews);
+        }
+
+        public IActionResult ShowLitterOverview(int id = 0)
+        {
+            var overview = _litterOverviewRepository.GetById(id);
+
+            return View(overview);
+        }
+
+        public IActionResult AcceptOverview(int id = 0)
+        {
+            var overview = _litterOverviewRepository.GetById(id);
+            overview.IsApproved = true;
+            _litterOverviewRepository.Edit(overview);
+            _litterOverviewRepository.Save();
+            return RedirectToAction("BrowseLitterOverviews");
         }
     }
 }
