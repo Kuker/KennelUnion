@@ -139,7 +139,9 @@ namespace KennelUnion.Web.Controllers
 
         public IActionResult ShowLitterOverview(int id = 0)
         {
-            var overview = _litterOverviewRepository.GetById(id);
+            var overview = _litterOverviewRepository.FindBy(x=>x.Id == id)
+                .Include(x=>x.Pups)
+                .FirstOrDefault();
 
             return View(overview);
         }
