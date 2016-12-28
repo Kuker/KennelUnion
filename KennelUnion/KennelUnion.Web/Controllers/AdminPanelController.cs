@@ -19,14 +19,16 @@ namespace KennelUnion.Web.Controllers
         private readonly IRepository<News> _newsRepository;
         private readonly IRepository<DogRegistry> _dogRegistryRepository;
         private readonly IRepository<LitterOverview> _litterOverviewRepository;
+        private readonly IRepository<MembershipDeclaration> _membershipDeclarationRepository;
         private readonly UserManager<IdentityUser> _userManager;
 
-        public AdminPanelController(UserManager<IdentityUser> userManager, IRepository<News> newsRepository, IRepository<DogRegistry> dogRegistryRepository, IRepository<LitterOverview> litterOverviewRepository)
+        public AdminPanelController(UserManager<IdentityUser> userManager, IRepository<News> newsRepository, IRepository<DogRegistry> dogRegistryRepository, IRepository<LitterOverview> litterOverviewRepository, IRepository<MembershipDeclaration> membershipDeclarationRepository)
         {
             this._userManager = userManager;
             _newsRepository = newsRepository;
             _dogRegistryRepository = dogRegistryRepository;
             _litterOverviewRepository = litterOverviewRepository;
+            _membershipDeclarationRepository = membershipDeclarationRepository;
         }
 
         public IActionResult Index()
@@ -153,6 +155,18 @@ namespace KennelUnion.Web.Controllers
             _litterOverviewRepository.Edit(overview);
             _litterOverviewRepository.Save();
             return RedirectToAction("BrowseLitterOverviews");
+        }
+
+        public IActionResult BrowseMembershipDeclarations(int page = 1, int maxPerPage = 15)
+        {
+            ViewBag.PagesCount = (int) Math.Ceiling((decimal) _membershipDeclarationRepository.GetAll().Count()/maxPerPage);
+            ViewBag.Page = page;
+            ViewBag.MaxPerPage = maxPerPage;
+            var declarations = _membershipDeclarationRepository.GetAll()
+                .OrderByDescending(x => x.CreatedOn)
+                .Skip((page - 1)*maxPerPage)
+                .Take(maxPerPage);
+            return View(declarations);
         }
     }
 }

@@ -1,0 +1,90 @@
+﻿@model System.Linq.IQueryable<KennelUnion.Data.Entities.MembershipDeclaration>
+
+@{
+    ViewBag.Title = "Przeglądaj deklaracje członkostwa";
+}
+
+<h1>Przeglądaj deklaracje członkostwa</h1>
+<div class="table-responsive">
+    <table class="table table-condensed table-striped">
+        <tr>
+            <th>Imię</th>
+            <th>Nazwisko</th>
+            <th>Ulica</th>
+            <th>Poczta</th>
+            <th>Miejscowość</th>
+            <th>Numer kontaktowy</th>
+            <th>E-mail</th>
+            <th>Kwota wpłaty</th>
+            <th>Propozycje przydomków</th>
+            <th>Data wysłania</th>
+            <th>Zaakceptowano</th>
+        </tr>
+        @foreach (var declaration in Model)
+        {
+            <tr>
+                <td>@declaration.Name</td>
+                <td>@declaration.Lastname</td>
+                <td>@declaration.Street</td>
+                <td>@declaration.Post</td>
+                <td>@declaration.Location</td>
+                <td>@declaration.PhoneNumber</td>
+                <td>@declaration.Email</td>
+                <td>@declaration.Contibution</td>
+                <td>@declaration.Nickname1<br/>@declaration.Nickname2<br/>@declaration.Nickname3</td>
+                <td>@declaration.CreatedOn</td>
+                <td>
+                    @if (declaration.IsApproved)
+                    {
+                        @: Tak
+                    }
+                    else
+                    {
+                        @: Nie
+                        <br/>
+                        <a asp-action="" asp-route-id="@declaration.Id">(Akceptuj)</a>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+<ul class="pagination">
+    @if (ViewBag.Page > 1)
+    {
+        <li><a asp-action="BrowseMembershipDeclarations" asp-route-page="@(ViewBag.Page - 1)">Poprzednia strona</a></li>
+    }
+
+    @if (ViewBag.Page > 3)
+    {
+        <li><a asp-action="BrowseMembershipDeclarations" asp-route-page="@(ViewBag.Page - 3)">@(ViewBag.Page - 3)</a></li>
+    }
+    @if (ViewBag.Page > 2)
+    {
+        <li><a asp-action="BrowseMembershipDeclarations" asp-route-page="@(ViewBag.Page - 2)">@(ViewBag.Page - 2)</a></li>
+    }
+    @if (ViewBag.Page > 1)
+    {
+        <li><a asp-action="BrowseMembershipDeclarations" asp-route-page="@(ViewBag.Page - 1)">@(ViewBag.Page - 1)</a></li>
+    }
+
+    <li class="active"><a>@(ViewBag.Page)</a></li>
+
+    @if (ViewBag.Page < ViewBag.PagesCount)
+    {
+        <li><a asp-action="BrowseMembershipDeclarations" asp-route-page="@(ViewBag.Page + 1)">@(ViewBag.Page + 1)</a></li>
+    }
+    @if (ViewBag.Page < ViewBag.PagesCount - 1)
+    {
+        <li><a asp-action="BrowseMembershipDeclarations" asp-route-page="@(ViewBag.Page + 2)">@(ViewBag.Page + 2)</a></li>
+    }
+    @if (ViewBag.Page < ViewBag.PagesCount - 2)
+    {
+        <li><a asp-action="BrowseMembershipDeclarations" asp-route-page="@(ViewBag.Page + 3)">@(ViewBag.Page + 3)</a></li>
+    }
+
+    @if (ViewBag.Page < ViewBag.PagesCount)
+    {
+        <li><a asp-action="BrowseMembershipDeclarations" asp-route-page="@(ViewBag.Page + 1)">Następna strona</a></li>
+    }
+</ul>
