@@ -10,7 +10,10 @@
         @RenderBody()
     </div>
 </div>
-<environment names="Development">
+<footer class="page-footer navbar-default navbar-fixed-bottom" id="nav-bottom">
+        <p>&copy; @DateTime.Now.Year - Radomir Nowak</p>
+</footer>
+<environment names="Development,Staging,Production">
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
     <script src="~/js/main.js"></script>

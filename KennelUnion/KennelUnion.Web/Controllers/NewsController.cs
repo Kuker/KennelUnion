@@ -16,21 +16,23 @@ namespace KennelUnion.Web.Properties.Controllers
 {
     public class NewsController : Controller
     {
-
-        private readonly UserManager<IdentityUser> userManager;
         private readonly IRepository<News> _newsRepo;
-        private int maxNewsPerPage { get; set; }
 
-        public NewsController(IRepository<News> newsRepo, UserManager<IdentityUser> userManager)
+        public NewsController(IRepository<News> newsRepo)
         {
             _newsRepo = newsRepo;
-            this.userManager = userManager;
-            maxNewsPerPage = 10;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int page = 1, int maxPerPage = 15)
         {
-            var news = _newsRepo.GetAll().Include(x=>x.Author).OrderByDescending(x=>x.CreatedOn).Take(maxNewsPerPage);
+            ViewBag.PagesCount = (int) Math.Ceiling((decimal) _newsRepo.GetAll().Count()/maxPerPage);
+            ViewBag.Page = page;
+            ViewBag.MaxPerPage = maxPerPage;
+            var news = _newsRepo.GetAll()
+                .Include(x=>x.Author)
+                .OrderByDescending(x=>x.CreatedOn)
+                .Skip((page - 1) * maxPerPage)
+                .Take(maxPerPage);
             return View(news.ToList());
         }
 

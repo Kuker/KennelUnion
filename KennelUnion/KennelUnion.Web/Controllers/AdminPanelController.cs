@@ -51,10 +51,15 @@ namespace KennelUnion.Web.Controllers
             return View();
         }
 
+        bool IsValidModelState()
+        {
+            return ModelState.IsValid;
+        }
+
         [HttpPost]
         public IActionResult AddNews(News model)
         {
-            if (!ModelState.IsValid)
+            if (!IsValidModelState())
             {
                 return View(model);
             }

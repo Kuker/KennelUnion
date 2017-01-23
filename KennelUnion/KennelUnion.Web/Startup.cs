@@ -38,12 +38,10 @@ namespace KennelUnion.Web
 
             services.AddSingleton(_config);
             services.AddDbContext<DatabaseContext>();
-
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<DatabaseContext>()
                 .AddDefaultTokenProviders();
-
-
+            
             services.AddScoped<IRepository<News>, NewsRepository>();
             services.AddScoped<IRepository<About>, AboutRepository>();
             services.AddScoped<IRepository<History>, HistoryRepository>();
@@ -51,7 +49,6 @@ namespace KennelUnion.Web
             services.AddScoped<IRepository<DogRegistry>, DogRegistryRepository>();
             services.AddScoped<IRepository<LitterOverview>, LitterOverviewRepository>();
             services.AddScoped<IRepository<MembershipDeclaration>, MembershipDeclarationRepository>();
-
             services.AddTransient<Seed>();
 
             services.AddMvc();

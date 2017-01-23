@@ -1,11 +1,35 @@
 ﻿// site.scss
+@import '_variables.scss';
+
+$grid-float-breakpoint: $screen-md-max;
+
 body {
     padding-top:50px;
+    padding-bottom: 50px;
 }
 
 .page-body {
     background-color: mintcream;
     color: darkgray;
+}
+
+#news-pagination {
+    display: block;
+}
+.page-footer {  
+    color: #fff;
+    text-align: center;
+    border-top: .05rem solid #e5e5e5;
+    p {
+        line-height: 49px;
+        margin: 0;
+    }
+}
+
+#nav-bottom {
+    margin-bottom: 0;
+    height: 50px;
+    border-radius: 0;
 }
 
 .wrap-words {
