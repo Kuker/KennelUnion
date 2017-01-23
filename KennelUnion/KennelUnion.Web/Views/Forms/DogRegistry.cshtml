@@ -2,72 +2,77 @@
 @{
     ViewData["Title"] = "Zarejestruj psa";
 }
-
 <h1>Wypełnij formularz rejestracji psa</h1>
 <form asp-controller="Forms" asp-action="DogRegistry" method="post">
-    <div class="form-group">
+    <div class="col-lg-6 col-md-12 col-sm-12">
+        <h2>Dane hodowcy</h2>
         <div class="form-group">
-            <label asp-for="Breeder.Name"></label>
-            <input class="form-control" asp-for="Breeder.Name" />
-        </div>
-        <div class="form-group">
-            <label asp-for="Breeder.Lastname"></label>
-            <input class="form-control" asp-for="Breeder.Lastname" />
-        </div>
-        <div class="form-group">
-            <label asp-for="Breeder.Street"></label>
-            <input class="form-control" asp-for="Breeder.Street" />
-        </div>
-        <div class="form-group">
-            <label asp-for="Breeder.Post"></label>
-            <input class="form-control" asp-for="Breeder.Post" />
-        </div>
-        <div class="form-group">
-            <label asp-for="Breeder.Location"></label>
-            <input class="form-control" asp-for="Breeder.Location" />
-        </div>
-        <div class="form-group">
-            <label asp-for="Breeder.PhoneNumber"></label>
-            <input class="form-control" asp-for="Breeder.PhoneNumber" />
-        </div>
-        <div class="form-group">
-            <label asp-for="Breeder.Email"></label>
-            <input class="form-control" asp-for="Breeder.Email" />
-        </div>
+            <div class="form-group">
+                <label asp-for="Breeder.Name"></label>
+                <input class="form-control" asp-for="Breeder.Name" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Breeder.Lastname"></label>
+                <input class="form-control" asp-for="Breeder.Lastname" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Breeder.Street"></label>
+                <input class="form-control" asp-for="Breeder.Street" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Breeder.Post"></label>
+                <input class="form-control" asp-for="Breeder.Post" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Breeder.Location"></label>
+                <input class="form-control" asp-for="Breeder.Location" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Breeder.PhoneNumber"></label>
+                <input class="form-control" asp-for="Breeder.PhoneNumber" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Breeder.Email"></label>
+                <input class="form-control" asp-for="Breeder.Email" />
+            </div>
 
+        </div>
     </div>
-    <div class="form-group">
+    <div class="col-lg-6 col-md-12 col-sm-12">
+        <h2>Dane psa</h2>
         <div class="form-group">
-            <label asp-for="Dog.Name"></label>
-            <input class="form-control" asp-for="Dog.Name" />
-        </div>
-        <div class="form-group">
-            <label asp-for="Dog.Breed"></label>
-            <input class="form-control" asp-for="Dog.Breed" />
-        </div>
-        <div class="form-group">
-            <label asp-for="Dog.Father"></label>
-            <input class="form-control" asp-for="Dog.Father" />
-        </div>
-        <div class="form-group">
-            <label asp-for="Dog.Mother"></label>
-            <input class="form-control" asp-for="Dog.Mother" />
-        </div>
-        <div class="form-group">
-            <label asp-for="Dog.Color"></label>
-            <input class="form-control" asp-for="Dog.Color" />
-        </div>
-        <div class="form-group">
-            <label asp-for="Dog.Sex"></label>
-            <input class="form-control" asp-for="Dog.Sex" />
-        </div>
-        <div class="form-group">
-            <label asp-for="Dog.BirthDate"></label>
-            <input class="form-control" asp-for="Dog.BirthDate" />
-        </div>
-        <div class="form-group">
-            <label asp-for="Dog.Chip"></label>
-            <input class="form-control" asp-for="Dog.Chip" />
+            <div class="form-group">
+                <label asp-for="Dog.Name"></label>
+                <input class="form-control" asp-for="Dog.Name" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Dog.Breed"></label>
+                <input class="form-control" asp-for="Dog.Breed" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Dog.Father"></label>
+                <input class="form-control" asp-for="Dog.Father" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Dog.Mother"></label>
+                <input class="form-control" asp-for="Dog.Mother" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Dog.Color"></label>
+                <input class="form-control" asp-for="Dog.Color" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Dog.Sex"></label>
+                <input class="form-control" asp-for="Dog.Sex" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Dog.BirthDate"></label>
+                <input class="form-control" asp-for="Dog.BirthDate" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Dog.Chip"></label>
+                <input class="form-control" asp-for="Dog.Chip" />
+            </div>
         </div>
     </div>
     <button class="btn btn-primary" type="submit">Zarejestruj</button>

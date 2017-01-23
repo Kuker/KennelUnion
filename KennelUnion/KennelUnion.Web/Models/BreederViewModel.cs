@@ -10,23 +10,29 @@ namespace KennelUnion.Web.Models
 {
     public class BreederViewModel
     {
-        [Required]
+        [PolishRequired]
+        [Display(Name = "Imię")]
         public string Name { get; set; }
-        [Required]
+        [PolishRequired]
+        [Display(Name = "Nazwisko")]
         public string Lastname { get; set; }
-        [Required]
+        [PolishRequired]
+        [Display(Name = "Ulica")]
         public string Street { get; set; }
-        [Required]
+        [PolishRequired]
+        [Display(Name = "Poczta")]
         public string Post { get; set; }
-        [Required]
+        [PolishRequired]
+        [Display(Name = "Miejscowość")]
         public string Location { get; set; }
-        [Required]
+        [PolishRequired]
         [DataType(DataType.PhoneNumber)]
+        [Display(Name = "Numer telefonu")]
         public string PhoneNumber { get; set; }
-        [Required]
+        [PolishRequired]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
-        
+
         public Dog Dog { get; set; }
     }
 }

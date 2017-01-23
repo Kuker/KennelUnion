@@ -4,20 +4,25 @@
     @await Html.PartialAsync("_HeadMain")
 </head>
 <body>
-@await Html.PartialAsync("_Navbar")
-<div class="container">
-    <div class="row">
-        @RenderBody()
+    @await Html.PartialAsync("_Navbar")
+    <div class="container">
+        <div class="row">
+            <div class="container">
+                @RenderBody()
+            </div>
+        </div>
     </div>
-</div>
-<footer class="page-footer navbar-default navbar-fixed-bottom" id="nav-bottom">
-        <p>&copy; @DateTime.Now.Year - Radomir Nowak</p>
-</footer>
-<environment names="Development,Staging,Production">
-    <script src="~/lib/jquery/dist/jquery.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="~/js/main.js"></script>
-</environment>
-@RenderSection("scripts", required: false)
+    <div class="container">
+        <hr />
+        <footer>
+            <p> &copy; Radomir Nowak @DateTime.Now.Year</p>
+        </footer>
+    </div>
+    <environment names="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/main.js"></script>
+    </environment>
+    @RenderSection("scripts", required: false)
 </body>
 </html>
