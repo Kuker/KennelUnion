@@ -14,12 +14,16 @@ namespace KennelUnion.Web.Controllers
         private readonly IRepository<About> _aboutRepo;
         private readonly IRepository<History> _historyRepo;
         private readonly IRepository<Contact> _contactRepo;
+        private readonly IRepository<BreederTips> _breederTipsRepo;
+        private readonly IRepository<OwnerTips> _ownerTipsRepo;
 
-        public InfoController(IRepository<About> aboutRepo, IRepository<History> historyRepo, IRepository<Contact> contactRepo)
+        public InfoController(IRepository<About> aboutRepo, IRepository<History> historyRepo, IRepository<Contact> contactRepo, IRepository<BreederTips> breederTipsRepo, IRepository<OwnerTips> ownerTipsRepo)
         {
             _aboutRepo = aboutRepo;
             _historyRepo = historyRepo;
             _contactRepo = contactRepo;
+            _breederTipsRepo = breederTipsRepo;
+            _ownerTipsRepo = ownerTipsRepo;
         }
 
         public IActionResult About()
@@ -38,6 +42,18 @@ namespace KennelUnion.Web.Controllers
         {
             var contact = _contactRepo.GetAll();
             return View(contact.Last());
+        }
+
+        public IActionResult BreederTips()
+        {
+            var dbItem = _breederTipsRepo.GetAll();
+            return View(dbItem.Last());
+        }
+
+        public IActionResult OwnerTips()
+        {
+            var dbItem = _ownerTipsRepo.GetAll();
+            return View(dbItem.Last());
         }
     }
 }

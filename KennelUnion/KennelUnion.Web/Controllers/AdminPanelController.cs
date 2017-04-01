@@ -24,12 +24,14 @@ namespace KennelUnion.Web.Controllers
         private readonly IRepository<About> _aboutRepository;
         private readonly IRepository<History> _historyRepository;
         private readonly IRepository<Contact> _contactRepository;
+        private readonly IRepository<BreederTips> _breederTipsRepository;
+        private readonly IRepository<OwnerTips> _ownerTipsRepository;
 
         private readonly UserManager<IdentityUser> _userManager;
 
         public AdminPanelController(UserManager<IdentityUser> userManager, IRepository<News> newsRepository,
             IRepository<DogRegistry> dogRegistryRepository, IRepository<LitterOverview> litterOverviewRepository,
-            IRepository<MembershipDeclaration> membershipDeclarationRepository, IRepository<About> aboutRepository, IRepository<History> historyRepository, IRepository<Contact> contactRepository)
+            IRepository<MembershipDeclaration> membershipDeclarationRepository, IRepository<About> aboutRepository, IRepository<History> historyRepository, IRepository<Contact> contactRepository, IRepository<BreederTips> breederTipsRepository, IRepository<OwnerTips> ownerTipsRepository)
         {
             this._userManager = userManager;
             _newsRepository = newsRepository;
@@ -39,6 +41,8 @@ namespace KennelUnion.Web.Controllers
             _aboutRepository = aboutRepository;
             _historyRepository = historyRepository;
             _contactRepository = contactRepository;
+            _breederTipsRepository = breederTipsRepository;
+            _ownerTipsRepository = ownerTipsRepository;
         }
 
         public IActionResult Index()
@@ -239,6 +243,7 @@ namespace KennelUnion.Web.Controllers
             return View(contact);
         }
 
+
         [HttpPost]
         public IActionResult EditContact(int id, Contact contactVm)
         {
@@ -248,6 +253,45 @@ namespace KennelUnion.Web.Controllers
 
             _contactRepository.Edit(contact);
             _contactRepository.Save();
+
+            return RedirectToAction("Index");
+        }
+        public IActionResult EditBreederTips()
+        {
+            var dbItem = _breederTipsRepository.GetAll().Last();
+
+            return View(dbItem);
+        }
+
+        [HttpPost]
+        public IActionResult EditBreederTips(int id, BreederTips dataVm)
+        {
+            var dbItem = _breederTipsRepository.GetById(id);
+
+            dbItem.Content = dataVm.Content;
+
+            _breederTipsRepository.Edit(dbItem);
+            _breederTipsRepository.Save();
+
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult EditOwnerTips()
+        {
+            var dbItem = _ownerTipsRepository.GetAll().Last();
+
+            return View(dbItem);
+        }
+
+        [HttpPost]
+        public IActionResult EditOwnerTips(int id, OwnerTips dataVm)
+        {
+            var dbItem = _ownerTipsRepository.GetById(id);
+
+            dbItem.Content = dataVm.Content;
+
+            _ownerTipsRepository.Edit(dbItem);
+            _ownerTipsRepository.Save();
 
             return RedirectToAction("Index");
         }

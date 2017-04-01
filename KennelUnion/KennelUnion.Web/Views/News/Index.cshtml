@@ -11,22 +11,25 @@
 
 @foreach (var news in Model)
 {
-    <h3 class="center-text">@news.Title</h3>
-    <p style="text-align: justify">@news.Preview</p>
-    <p style="float: right">@news.CreatedOn</p>
-    if (news.Author != null)
-    {
-        <p>Autor: @news.Author.UserName</p>
-    }
-    <div style="float: right">
-        <a asp-action="Show" asp-route-id="@news.Id">Czytaj więcej...</a>
-        @if (SignInManager.IsSignedIn(User))
+    <div>
+        <h3 class="center-text">@news.Title</h3>
+        <p style="text-align: justify">@news.Preview</p>
+        <p class="news-date"style="float: right">@news.CreatedOn</p>
+        @if (news.Author != null)
         {
-            <a asp-action="Edit" asp-route-id="@news.Id">Edytuj</a>
+        <p>Autor: @news.Author.UserName</p>
         }
+        <div style="float: right">
+            <a asp-action="Show" asp-route-id="@news.Id">Czytaj więcej...</a>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <a asp-action="Edit" asp-route-id="@news.Id">Edytuj</a>
+            }
+        </div>
+        <br />
+        <hr />
+
     </div>
-    <br />
-    <hr />
 }
 
 <ul class="pagination" id="news-pagination">

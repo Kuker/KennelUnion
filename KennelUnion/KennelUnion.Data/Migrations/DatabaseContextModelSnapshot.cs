@@ -60,6 +60,20 @@ namespace KennelUnion.Data.Migrations
                     b.ToTable("Breeders");
                 });
 
+            modelBuilder.Entity("KennelUnion.Data.Entities.BreederTips", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Content");
+
+                    b.Property<DateTime>("CreatedOn");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BreederTips");
+                });
+
             modelBuilder.Entity("KennelUnion.Data.Entities.Comment", b =>
                 {
                     b.Property<int>("Id")
@@ -250,6 +264,20 @@ namespace KennelUnion.Data.Migrations
                     b.HasIndex("AuthorId");
 
                     b.ToTable("NewsSet");
+                });
+
+            modelBuilder.Entity("KennelUnion.Data.Entities.OwnerTips", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Content");
+
+                    b.Property<DateTime>("CreatedOn");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OwnerTips");
                 });
 
             modelBuilder.Entity("KennelUnion.Data.Entities.Pup", b =>
