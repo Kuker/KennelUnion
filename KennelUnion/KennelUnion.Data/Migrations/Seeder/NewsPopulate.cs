@@ -1,23 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using KennelUnion.Data.Entities;
+﻿using KennelUnion.Data.Entities;
 using KennelUnion.Data.Repositories;
+using System;
 
 namespace KennelUnion.Data.Migrations
 {
-    public class Seed
+    class NewsPopulate : IDBSeedHelper
     {
         private IRepository<News> _newsRepo;
 
-        public Seed(IRepository<News> newsRepo)
+        public NewsPopulate(IRepository<News> newsRepo)
         {
             _newsRepo = newsRepo;
         }
 
-        public void PopulateDb()
+        public void Seed()
         {
             var random = new Random();
             var titles =
@@ -33,7 +29,7 @@ namespace KennelUnion.Data.Migrations
                 var news = new News
                 {
                     Title =
-                        titlesSeparated[random.Next(max)] + " " +  titlesSeparated[random.Next(max)] + " " +
+                        titlesSeparated[random.Next(max)] + " " + titlesSeparated[random.Next(max)] + " " +
                         titlesSeparated[random.Next(max)],
                     CreatedOn = DateTime.Now,
                     UpdatedOn = DateTime.Now,
