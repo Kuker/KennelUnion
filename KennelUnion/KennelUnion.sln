@@ -3,23 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2047
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KennelUnion.Api", "KennelUnion.Api\KennelUnion.Api.csproj", "{B1A712B9-6614-4173-9D4D-EBB42D2C2959}"
-EndProject
 Global
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B1A712B9-6614-4173-9D4D-EBB42D2C2959}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B1A712B9-6614-4173-9D4D-EBB42D2C2959}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B1A712B9-6614-4173-9D4D-EBB42D2C2959}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B1A712B9-6614-4173-9D4D-EBB42D2C2959}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {FD0B0A1F-3E07-4AB3-B4E1-5CDC6DB0DC41}
+		SolutionGuid = {5F3EFAD4-E970-4143-8EA3-768F231300C6}
 	EndGlobalSection
 EndGlobal
