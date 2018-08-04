@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using KennelUnion.Data.Context;
+using KennelUnion.Data.DI;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,6 +29,8 @@ namespace KennelUnion.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddDbContext<DatabaseContext>();
+            services.RegisterDbDependencies();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,7 +44,6 @@ namespace KennelUnion.Web
             {
                 app.UseHsts();
             }
-
             app.UseHttpsRedirection();
             app.UseMvc();
         }
